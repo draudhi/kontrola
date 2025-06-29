@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
+import { MotionNav, MotionDiv, MotionButton, MotionA } from "./Motion"; // import wrapper
+import { fadeIn } from "../utils/motion";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, SetIsMenuOpen] = useState(false);
@@ -13,30 +16,42 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100 shadow-sm">
-      <div className="w-full container mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 md:h-20 h-16">
+    <MotionNav
+      variants={fadeIn("down", 0.2)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
+      className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100 shadow-sm"
+    >
+      <MotionDiv className="w-full flex items-center justify-between px-2 md:px-4 lg:px-6 md:h-20 h-16 gap-4">
         {/* Logo */}
-        <div className="flex items-center gap-1 cursor-pointer">
-          <div className="w-4 h-4 bg-blue-600 rounded-full opacity-75 hover:opacity-100 transition-opacity"></div>
-          <div className="w-4 h-4 bg-red-500 -ml-2 rounded-full opacity-100 hover:opacity-75 transition-opacity"></div>
-        </div>
+        <MotionDiv variants={fadeIn("down", 0.5)}>
+          <MotionA href="#home" className="flex items-center cursor-pointer">
+            <img
+              src="kontrola-logo.png"
+              alt="Kontrola Logo"
+              className="h-16 md:h-12 lg:h-16 object-contain"
+            />
+          </MotionA>
+        </MotionDiv>
 
         {/* mobile menu button */}
-        <button
+        <MotionButton
           onClick={() => SetIsMenuOpen(!isMenuOpen)}
           className="md:hidden p-2"
+          aria-label="Toggle menu"
         >
           {isMenuOpen ? (
             <HiX className="size-6" />
           ) : (
             <HiMenu className="size-6" />
           )}
-        </button>
+        </MotionButton>
 
         {/* desktop navitems */}
-        <div className="hidden md:flex items-center gap-10">
+        <MotionDiv className="hidden md:flex items-center gap-10">
           {navLinks.map((link, index) => (
-            <a
+            <MotionA
               key={index}
               href={link.href}
               onClick={() => setActiveLink(link.href)}
@@ -47,22 +62,22 @@ const Navbar = () => {
               }`}
             >
               {link.label}
-            </a>
+            </MotionA>
           ))}
-        </div>
+        </MotionDiv>
 
         {/* get in touch btn */}
-        <button className="hidden md:block bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-lg hover:shadow-blue-100">
-          <a href="#newsletter">Get In Touch</a>
-        </button>
-      </div>
+        <MotionButton className="hidden md:block bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-lg hover:shadow-blue-100">
+          <MotionA href="#newsletter">Get In Touch</MotionA>
+        </MotionButton>
+      </MotionDiv>
 
       {/* mobile menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-100 py-4">
-          <div className="container mx-auto px-4 space-y-3">
+        <MotionDiv className="md:hidden bg-white border-t border-gray-100 py-4">
+          <MotionDiv className="container mx-auto px-4 space-y-3">
             {navLinks.map((link, index) => (
-              <a
+              <MotionA
                 key={index}
                 onClick={() => {
                   setActiveLink(link.href);
@@ -76,16 +91,16 @@ const Navbar = () => {
                 href={link.href}
               >
                 {link.label}
-              </a>
+              </MotionA>
             ))}
 
-            <button className="w-full bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-lg hover:shadow-blue-100">
-              <a href="#newsletter">Get In Touch</a>
-            </button>
-          </div>
-        </div>
+            <MotionButton className="w-full bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-lg hover:shadow-blue-100">
+              <MotionA href="#newsletter">Get In Touch</MotionA>
+            </MotionButton>
+          </MotionDiv>
+        </MotionDiv>
       )}
-    </nav>
+    </MotionNav>
   );
 };
 

@@ -6,6 +6,11 @@ import PurposeSection from "./component/PurposeSection";
 import FeaturesSection from "./component/FeaturesSection";
 import SchedulesSection from "./component/SchedulesSection";
 import MonitorSection from "./component/MonitorSection";
+import PricingSection from "./component/PricingSection";
+import ServiceSection from "./component/ServiceSection";
+import TestimonialSection from "./component/TestimonialSection";
+import NewsletterSection from "./component/NewsletterSection";
+import Footer from "./component/Footer";
 
 function App() {
   return (
@@ -19,6 +24,11 @@ function App() {
         <FeaturesSection />
         <SchedulesSection />
         <MonitorSection />
+        <PricingSection />
+        <ServiceSection />
+        <TestimonialSection />
+        <NewsletterSection />
+        <Footer />
       </div>
     </main>
   );
